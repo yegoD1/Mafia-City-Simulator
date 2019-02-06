@@ -3,6 +3,9 @@ var height = Math.max(document.documentElement.clientHeight, window.innerHeight 
 var mafiaLevel = 0;
 var currentMoney = 0;
 var currentDollar = 0;
+var swaglevel = "Crook"
+var swaglist = ["Hitman","Boss","Mafia Leader","Godfather","Demigod","SANS"]
+var moneySpawnRate = 1000
 
 Element.prototype.remove = function() {
     this.parentElement.removeChild(this);
@@ -50,8 +53,27 @@ function createMoney(leftPos,topPos) {
         document.getElementById(img.id).remove()
         mafiaLevel++;
         show100dollar(leftPos,topPos)
-        document.getElementById("level").innerText = "Mafia Level: LV." + mafiaLevel
-        var audio = new Audio('moneysound.mp3');
+        if(mafiaLevel >= 1000) {
+            swaglevel = swaglist[5];
+        }
+        else if(mafiaLevel >= 500) {
+            swaglevel = swaglist[4];
+        }
+        else if(mafiaLevel >= 250) {
+            swaglevel = swaglist[3];
+        }
+        else if(mafiaLevel >= 150) {
+            swaglevel = swaglist[2];
+        }
+        else if(mafiaLevel >= 100) {
+            swaglevel = swaglist[1];
+        }
+        else if(mafiaLevel >= 25) {
+            swaglevel = swaglist[0];
+        }
+        document.getElementById("level").innerText = "Mafia Level: LV." + mafiaLevel + " - " + swaglevel
+        var audio = new Audio('moneysound.wav');
+        
     audio.play();
     };
 };
@@ -88,7 +110,7 @@ setTimeout(function(){
         var randomTopPos = Math.floor(Math.random() * height)
         createMoney(randomLeftPos,randomTopPos)
         
-    },1000)
+    },moneySpawnRate)
 },6000)
 
 
