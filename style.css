@@ -1,0 +1,29 @@
+html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-size: 60px;
+    font-weight: 5px;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    top: 45%;
+}
+
+.startfadeout {
+    animation-name: fadeout;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+}
+
+@keyframes fadeout {
+    0% {opacity: 1};
+    100% {opacity: 0};
+}
