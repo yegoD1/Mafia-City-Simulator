@@ -5,7 +5,7 @@ html{
     width: 100%;
     overflow: hidden;
 }
-h2 {
+.title {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     font-size: 60px;
@@ -14,16 +14,26 @@ h2 {
     padding: 0;
     margin: 0;
     width: 100%;
+}
+
+#level {
+    font-size: 20px;
+    top: 15%;
+    display: none;
+}
+
+#title {
     top: 45%;
 }
 
-.startfadeout {
-    animation-name: fadeout;
-    animation-duration: 2s;
-    animation-iteration-count: 1;
+#maintitle {
+    display: none;
+    font-size: 40px;
 }
 
-@keyframes fadeout {
-    0% {opacity: 1};
-    100% {opacity: 0};
+#info {
+    font-size: 15px;
+    bottom:90%;
+    height: 0%;
+    display: none;
 }
