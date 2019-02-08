@@ -1,3 +1,4 @@
+// Defines all the necessary variables to run the game.
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 var mafiaLevel = 0;
@@ -6,7 +7,11 @@ var currentDollar = 0;
 var swaglevel = "Crook"
 var swaglist = ["Hitman","Boss","Mafia Leader","Godfather","Demigod","SANS"]
 var moneySpawnRate = 1000
+var comboLevel = 0;
+var clicked = false;
+var comboActive = false;
 
+// Function for removing money after it has been clicked on.
 Element.prototype.remove = function() {
     this.parentElement.removeChild(this);
 }
@@ -22,6 +27,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 
 ['', '-ms-', '-webkit-', '-o-', '-moz-'].map(function(prefix) { document.body.style[prefix + 'transform'] = 'rotate(' + 0 + 'deg)'; });
 
+// When you click on a money, it creates a $100 image that dissapears after a second.
 function show100dollar(leftLocation,topLocation) {
     var img = document.createElement("img");
     img.src = "100dollar.png";
@@ -38,10 +44,13 @@ function show100dollar(leftLocation,topLocation) {
     },500)
 }
 
+
+// Creates the function which handles spawning money on screen.
 function createMoney(leftPos,topPos) {
     var img = document.createElement("img");
     img.src = "money.png";
     img.id = "money" + currentMoney;
+    clicked = true
     img.width = 150;
     img.height = 150;
     document.body.appendChild(img);
@@ -52,7 +61,10 @@ function createMoney(leftPos,topPos) {
     document.getElementById(img.id).onclick = function() {
         document.getElementById(img.id).remove()
         mafiaLevel++;
+        comboLevel++;
+        comboActive = true;
         show100dollar(leftPos,topPos)
+        // Checks what level you are and if you meet the requirements, sets you to a certain name.
         if(mafiaLevel >= 1000) {
             swaglevel = swaglist[5];
         }
@@ -73,6 +85,7 @@ function createMoney(leftPos,topPos) {
         }
         document.getElementById("level").innerText = "Mafia Level: LV." + mafiaLevel + " - " + swaglevel
         var audio = new Audio('moneysound.wav');
+        clicked = false;
         
     audio.play();
     };
@@ -80,7 +93,7 @@ function createMoney(leftPos,topPos) {
 
 
 
-
+// The shake effect when starting the game.
 var shake = setTimeout(function(){
     var velocityWings = 0;
     var j = Math.floor((Math.random() * 360) + 1);;
@@ -93,6 +106,8 @@ var shake = setTimeout(function(){
                     }
                 }, 1);
 },1000)
+
+// The fadeout effect and fadein effects when you first start the game.
 setTimeout(function(){
     $("#title").fadeOut('slow');
     $('#maintitle').fadeIn("slow");
@@ -104,8 +119,11 @@ setTimeout(function(){
     clearInterval("shake");
 },4000);
 
+//Spawns the money every second.
 setTimeout(function(){
     setInterval(function(){
+        width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var randomLeftPos = Math.floor(Math.random() * width)
         var randomTopPos = Math.floor(Math.random() * height)
         createMoney(randomLeftPos,randomTopPos)

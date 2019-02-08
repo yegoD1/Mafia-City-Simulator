@@ -37,3 +37,8 @@ html{
     height: 0%;
     display: none;
 }
+
+#combo {
+    left: 35%;
+    top: 10%;
+}
