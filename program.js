@@ -9,6 +9,7 @@ var swaglist = ["Hitman","Boss","Mafia Leader","Godfather","Demigod","SANS","Ove
 var moneySpawnRate = 500
 var comboLevel = 0;
 var comboActive = false;
+var comboImage = document.getElementById("combo")
 
 // Function for removing money after it has been clicked on.
 Element.prototype.remove = function() {
@@ -67,13 +68,13 @@ function createMoney(leftPos,topPos) {
         if(mafiaLevel >= 25000) {
             swaglevel = swaglist[8];
         }
-        if(mafiaLevel >= 15000) {
+        else if(mafiaLevel >= 15000) {
             swaglevel = swaglist[7];
         }
-        if(mafiaLevel >= 9000) {
+        else if(mafiaLevel >= 9000) {
             swaglevel = swaglist[6];
         }
-        if(mafiaLevel >= 3000) {
+        else if(mafiaLevel >= 3000) {
             swaglevel = swaglist[5];
         }
         else if(mafiaLevel >= 1500) {
@@ -157,8 +158,14 @@ var timeout = 0;
 setInterval(function(){
     if (comboActive == true) {
         timeout++;
+        if(comboLevel >= 20){
+            comboImage.classList.add("rainbow");
+        }
         if (timeout == 14) {
             console.log("combo over");
+            if (comboImage.classList.contains("rainbow")) {
+                comboImage.classList.remove("rainbow");
+            };
             comboActive = false;
             comboLevel = 0;
             timeout = 0;

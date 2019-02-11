@@ -43,3 +43,18 @@ html{
     top: 10%;
     display: none;
 }
+
+.rainbow {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: -webkit-linear-gradient(92deg, red, darkorange);
+    background-clip: text;
+    animation: hue 5s infinite linear;
+}
+
+@keyframes hue {
+    from {
+      -webkit-filter: hue-rotate(0deg); }
+    to {
+      -webkit-filter: hue-rotate(-360deg); } }
