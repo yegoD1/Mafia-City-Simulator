@@ -24,7 +24,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function () {
 };
 
 
-
+// Makes sure the shake effect works.
 ['', '-ms-', '-webkit-', '-o-', '-moz-'].map(function (prefix) {
     document.body.style[prefix + 'transform'] = 'rotate(' + 0 + 'deg)';
 });
@@ -42,7 +42,7 @@ function show100dollar(leftLocation, topLocation) {
     img.style.left = leftLocation + 45;
     currentDollar++
     setTimeout(function () {
-        $("#" + img.id).fadeOut("slow")
+        $("#" + img.id).fadeOut("slow");
     }, 500)
 }
 
@@ -110,7 +110,7 @@ var shake = setTimeout(function () {
     }, 1);
 }, 1000)
 
-// Makes the combo multiple shake more and more the higher combo you are. 
+// Makes the combo multiplier shake more and more the higher combo you are. 
 var comboshake = setTimeout(function () {
     var j = Math.floor((Math.random() * comboLevel));;
     setInterval(function () {
@@ -165,7 +165,7 @@ setInterval(function () {
             comboActive = false;
             comboLevel = 0;
             timeout = 0;
-        }
+        }                                                                                       
     }
     document.getElementById("combo").innerText = comboLevel + "x";
 }, 100);
