@@ -1,6 +1,10 @@
 html {
     margin: 0;
     padding: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -40,9 +44,10 @@ html {
 }
 
 #combo {
-    left: 35%;
+    left: 75%;
     top: 10%;
     display: none;
+    width: 15%;
 }
 
 .rainbow {
@@ -50,9 +55,9 @@ html {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-image: -webkit-linear-gradient(92deg, red, darkorange);
-    background-clip: text;
     animation: hue 5s infinite linear;
 }
+
 
 @keyframes hue {
     from {
