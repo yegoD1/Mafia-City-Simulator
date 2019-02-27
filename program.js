@@ -48,9 +48,9 @@ function show100dollar(leftLocation, topLocation) {
 
 
 // Creates the function which handles spawning money on screen.
-function createMoney(leftPos, topPos) {
+function createMoney(leftPos, topPos, imgLoc) {
     var img = document.createElement("img");
-    img.src = "money.png";
+    img.src = imgLoc;
     img.id = "money" + currentMoney;
     img.width = 150;
     img.height = 150;
@@ -144,8 +144,8 @@ setTimeout(function () {
         height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var randomLeftPos = Math.floor(Math.random() * width)
         var randomTopPos = Math.floor(Math.random() * height)
-        createMoney(randomLeftPos, randomTopPos)
-
+        createMoney(randomLeftPos, randomTopPos, "money.png")
+        var goldenMoneyChance = Math.floor(Math.random()* 100) + 1
     }, moneySpawnRate)
 }, 6000)
 
