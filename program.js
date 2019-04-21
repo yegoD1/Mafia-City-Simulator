@@ -10,6 +10,7 @@ var moneySpawnRate = 600
 var comboLevel = 0;
 var comboActive = false;
 var comboImage = document.getElementById("combo")
+var goldenMoneyChance = Math.floor(Math.random()* 100) + 1;
 
 // Function for removing money after it has been clicked on.
 Element.prototype.remove = function () {
@@ -48,7 +49,7 @@ function show100dollar(leftLocation, topLocation) {
 
 
 // Creates the function which handles spawning money on screen.
-function createMoney(leftPos, topPos, imgLoc) {
+function createMoney(leftPos, topPos, imgLoc, goldenMon) {
     var img = document.createElement("img");
     img.src = imgLoc;
     img.id = "money" + currentMoney;
@@ -61,7 +62,13 @@ function createMoney(leftPos, topPos, imgLoc) {
     currentMoney++
     document.getElementById(img.id).onclick = function () {
         document.getElementById(img.id).remove()
+        if(goldenMon === false){
         mafiaLevel += Math.floor(comboLevel * 0.75) + 1;
+        }
+        else {
+            mafiaLevel += Math.floor(comboLevel * 0.75) + 5000;
+            comboLevel += 25;
+        }
         comboLevel++;
         timeout = 0;
         comboActive = true;
@@ -142,10 +149,13 @@ setTimeout(function () {
     setInterval(function () {
         width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        var randomLeftPos = Math.floor(Math.random() * width)
-        var randomTopPos = Math.floor(Math.random() * height)
-        createMoney(randomLeftPos, randomTopPos, "money.png")
-        var goldenMoneyChance = Math.floor(Math.random()* 100) + 1
+        var randomLeftPos = Math.floor(Math.random() * width);
+        var randomTopPos = Math.floor(Math.random() * height);
+        createMoney(randomLeftPos, randomTopPos, "money.png", false);
+        var goldenMoneyChance = Math.floor(Math.random()* 100) + 1;
+        if (goldenMoneyChance = 1){
+            createMoney(randomLeftPos, randomTopPos, "goldenmoney.png", true)
+        };
     }, moneySpawnRate)
 }, 6000)
 
