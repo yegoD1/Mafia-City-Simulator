@@ -62,13 +62,15 @@ function createMoney(leftPos, topPos, imgLoc, goldenMon) {
     currentMoney++
     document.getElementById(img.id).onclick = function () {
         document.getElementById(img.id).remove()
+        // This determines what happens if a golden money spawns.
         if(goldenMon === false){
         mafiaLevel += Math.floor(comboLevel * 0.75) + 1;
         }
         else {
-            mafiaLevel += Math.floor(comboLevel * 0.75) + 5000;
+            mafiaLevel += Math.floor(comboLevel * 0.75) + 1500;
             comboLevel += 25;
         }
+        // Increases combo level and reset the timeout for the current combo.
         comboLevel++;
         timeout = 0;
         comboActive = true;
@@ -93,9 +95,9 @@ function createMoney(leftPos, topPos, imgLoc, goldenMon) {
         } else if (mafiaLevel >= 75) {
             swaglevel = swaglist[0];
         }
+        // Changes the mafia level on the webpage to your current mafia level.
         document.getElementById("level").innerText = "Mafia Level: LV." + mafiaLevel + " - " + swaglevel
         var audio = new Audio('moneysound.wav');
-
         audio.play();
     };
 };
@@ -144,16 +146,19 @@ setTimeout(function () {
     clearInterval("shake");
 }, 4000);
 
-// Spawns the money every second.
+// Spawns the money every second and also makes a random number
+// and must equal 1 to spawn a golden money.
 setTimeout(function () {
     setInterval(function () {
         width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var randomLeftPos = Math.floor(Math.random() * width);
         var randomTopPos = Math.floor(Math.random() * height);
-        createMoney(randomLeftPos, randomTopPos, "money.png", false);
         var goldenMoneyChance = Math.floor(Math.random()* 100) + 1;
-        if (goldenMoneyChance = 1){
+        if(goldenMoneyChance > 1) {
+        createMoney(randomLeftPos, randomTopPos, "money.png", false);
+        }
+        if (goldenMoneyChance == 1){
             createMoney(randomLeftPos, randomTopPos, "goldenmoney.png", true)
         };
     }, moneySpawnRate)
@@ -164,6 +169,7 @@ var timeout = 0;
 setInterval(function () {
     if (comboActive == true) {
         timeout++;
+        // Once your combo reaches 20, it will start to have a rainbow effect.
         if (comboLevel >= 20) {
             comboImage.classList.add("rainbow");
         }
